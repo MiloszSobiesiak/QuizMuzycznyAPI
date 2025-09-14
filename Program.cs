@@ -31,7 +31,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendPolicy", policy =>
     {
-        policy.WithOrigins("https://quiz-muzyczny.vercel.app")
+        policy.WithOrigins(
+                "https://quiz-muzyczny.vercel.app"
+            )
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();

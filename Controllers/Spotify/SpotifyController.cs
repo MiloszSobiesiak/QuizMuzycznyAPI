@@ -62,7 +62,7 @@ public class SpotifyController(IMediator mediator, IHttpClientFactory httpClient
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.None,
             Expires = DateTimeOffset.Now.AddDays(7)
         });
 

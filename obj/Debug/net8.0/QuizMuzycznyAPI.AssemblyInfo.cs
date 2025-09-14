@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuizMuzycznyAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19012955ac387da828044ec3e90e400371ec89ad")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+348877bccaec9cd8a6f1de8fb51bff7e45379f24")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuizMuzycznyAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuizMuzycznyAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
