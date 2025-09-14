@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using QuizMuzycznyAPI.Features.Sessions.Commands.DeleteSession;
 using QuizMuzycznyAPI.Features.Sessions.Queries.GetSessionUser;
 
 namespace QuizMuzycznyAPI.Controllers.Sessions;
@@ -24,16 +25,15 @@ public class SessionsController(IMediator mediator) : ControllerBase
         });
     }
 
-    // [HttpPost("logout")]
-    // public async Task<IActionResult> Logout()
-    // {
-    //     if (!Request.Cookies.TryGetValue("session_id", out var sessionId))
-    //         return BadRequest("Brak sesji do wylogowania");
-    //
-    //     await mediator.Send(new DeleteSessionCommand(sessionId));
-    //
-    //     Response.Cookies.Delete("session_id");
-    //
-    //     return Ok(new { message = "Wylogowano pomyślnie" });
-    // }
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        if (!Request.Cookies.TryGetValue("session_id", out var sessionId))
+            return BadRequest("Brak sesji do wylogowania");
+    
+        await mediator.Send(new DeleteSessionCommand(sessionId));
+        Response.Cookies.Delete("session_id");
+    
+        return Ok();
+    }
 }
