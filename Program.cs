@@ -7,7 +7,7 @@ using QuizMuzycznyAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5055";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 // 1. Dodaj DbContext
