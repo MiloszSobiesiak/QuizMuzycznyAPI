@@ -17,7 +17,7 @@ public class SpotifyController(IMediator mediator, IHttpClientFactory httpClient
     {
         var clientId = config["Spotify:ClientId"];
         var clientSecret = config["Spotify:ClientSecret"];
-        var redirectUri = "https://1b5109c5cc42.ngrok-free.app/api/spotify/callback";
+        var redirectUri = "https://empathetic-youth-production.up.railway.app/api/spotify/callback";
         
         var client = httpClientFactory.CreateClient();
         var body = new Dictionary<string, string>
