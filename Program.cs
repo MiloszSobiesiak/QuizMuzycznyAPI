@@ -7,6 +7,9 @@ using QuizMuzycznyAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://*:{port}");
+
 // 1. Dodaj DbContext
 var connectionString = "Host=metro.proxy.rlwy.net:27283;Port=5432;Database=railway;Username=postgres;Password=YCTWDGvHJxpnaGnWjzJIGvTMldinAjsv";
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -47,8 +50,5 @@ app.UseCors("FrontendPolicy");
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
-
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-app.Urls.Add($"http://*:{port}");
 
 app.Run();
