@@ -20,7 +20,6 @@ public class GetFavouritesQueryHandler()
 
         // Mapowanie na DTO
         return savedTracks.Items
-            .Where(x => x.Track.PreviewUrl != null)
             .Select(x => new TrackDTO
             {
                 Id = x.Track.Id,
