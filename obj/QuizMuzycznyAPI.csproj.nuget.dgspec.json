@@ -73,6 +73,14 @@
               "target": "Package",
               "version": "[9.0.4, )"
             },
+            "SpotifyAPI.Web": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            },
+            "SpotifyAPI.Web.Auth": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"

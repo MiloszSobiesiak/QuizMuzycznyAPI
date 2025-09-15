@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuizMuzycznyAPI.Features.Sessions.Commands.CreateSession;
 using QuizMuzycznyAPI.Features.Sessions.Queries.GetSessionUser;
 using QuizMuzycznyAPI.Features.Spotify.Models;
+using QuizMuzycznyAPI.Features.Spotify.Queries.GetFavourites;
 using QuizMuzycznyAPI.Features.Users.Commands.CreateOrUpdateUser;
 using QuizMuzycznyAPI.Features.Users.Models;
 
@@ -85,5 +86,12 @@ public class SpotifyController(IMediator mediator, IHttpClientFactory httpClient
         var json = await response.Content.ReadAsStringAsync();
 
         return Content(json, "application/json");
+    }
+    
+    [HttpGet("favourites")]
+    public async Task<IActionResult> GetFavourites()
+    {
+        var result = await mediator.Send(new GetFavouritesQuery());
+        return Ok(result);
     }
 }
