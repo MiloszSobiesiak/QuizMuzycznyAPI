@@ -91,13 +91,21 @@ public class SpotifyController(IMediator mediator, IHttpClientFactory httpClient
     [HttpGet("favourites")]
     public async Task<IActionResult> GetFavourites()
     {
-        if (!Request.Cookies.TryGetValue("session_id", out var sessionId))
-            return Unauthorized();
+        try
+        {
+            if (!Request.Cookies.TryGetValue("session_id", out var sessionId))
+                return Unauthorized();
 
-        var user = await mediator.Send(new GetSessionUserQuery(sessionId));
-        if (user == null) return Unauthorized();
-        
-        var result = await mediator.Send(new GetFavouritesQuery(user));
-        return Ok(result);
+            var user = await mediator.Send(new GetSessionUserQuery(sessionId));
+            if (user == null) return Unauthorized();
+
+            var result = await mediator.Send(new GetFavouritesQuery(user));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex); // Railway loguje stdout/stderr
+            return StatusCode(500, ex.Message);
+        }
     }
 }
