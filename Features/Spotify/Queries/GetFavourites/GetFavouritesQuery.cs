@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using QuizMuzycznyAPI.Features._Base.RequireSpotifyAuth;
 using QuizMuzycznyAPI.Features.Spotify.Models;
+using QuizMuzycznyAPI.Features.Users.Models;
 
 namespace QuizMuzycznyAPI.Features.Spotify.Queries.GetFavourites;
 
-public record GetFavouritesQuery : IRequest<IEnumerable<TrackDTO>>, IRequireSpotifyAuth;
+public record GetFavouritesQuery(User User) : IRequest<IEnumerable<TrackDTO>>;

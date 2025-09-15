@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using QuizMuzycznyAPI.Features.Spotify.Models;
-using QuizMuzycznyAPI.Features.Users.Models;
 using SpotifyAPI.Web;
 
 namespace QuizMuzycznyAPI.Features.Spotify.Queries.GetFavourites;
@@ -11,11 +10,8 @@ public class GetFavouritesQueryHandler(
 {
     public async Task<IEnumerable<TrackDTO>> Handle(GetFavouritesQuery request, CancellationToken cancellationToken)
     {
-        var context = httpContextAccessor.HttpContext;
-        var user = (User)context.Items["SpotifyUser"];
-
         // Tworzymy klienta Spotify z access tokenem
-        var spotify = new SpotifyClient(user.SpotifyAccessToken);
+        var spotify = new SpotifyClient(request.User.SpotifyAccessToken);
 
         // Pobieramy maksymalnie 50 ulubionych utworów
         var savedTracks = await spotify.Library.GetTracks(new LibraryTracksRequest

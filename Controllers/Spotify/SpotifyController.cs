@@ -91,7 +91,13 @@ public class SpotifyController(IMediator mediator, IHttpClientFactory httpClient
     [HttpGet("favourites")]
     public async Task<IActionResult> GetFavourites()
     {
-        var result = await mediator.Send(new GetFavouritesQuery());
+        if (!Request.Cookies.TryGetValue("session_id", out var sessionId))
+            return Unauthorized();
+
+        var user = await mediator.Send(new GetSessionUserQuery(sessionId));
+        if (user == null) return Unauthorized();
+        
+        var result = await mediator.Send(new GetFavouritesQuery(user));
         return Ok(result);
     }
 }
