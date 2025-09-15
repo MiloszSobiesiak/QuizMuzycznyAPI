@@ -4,8 +4,7 @@ using SpotifyAPI.Web;
 
 namespace QuizMuzycznyAPI.Features.Spotify.Queries.GetFavourites;
 
-public class GetFavouritesQueryHandler(
-    IHttpContextAccessor httpContextAccessor)
+public class GetFavouritesQueryHandler()
     : IRequestHandler<GetFavouritesQuery, IEnumerable<TrackDTO>>
 {
     public async Task<IEnumerable<TrackDTO>> Handle(GetFavouritesQuery request, CancellationToken cancellationToken)
