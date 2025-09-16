@@ -18,9 +18,14 @@ public class GamesHub : Hub
         return base.OnConnectedAsync();
     }
 
-    public async Task JoinGame(Guid gameId, string playerName)
+    public async Task JoinGame(string gameIdString, string playerName)
     {
-        Console.WriteLine($"Attempt to join game: {gameId}");
+        if (!Guid.TryParse(gameIdString, out var gameId))
+        {
+            Console.WriteLine($"[ERROR] Invalid gameId: {gameIdString}");
+            await Clients.Caller.SendAsync("Error", "Invalid game ID");
+            return;
+        }
 
         var game = _repo.GetGame(gameId);
         if (game == null)
@@ -31,9 +36,9 @@ public class GamesHub : Hub
         }
 
         game.Players.Add(playerName);
-
         Console.WriteLine($"[INFO] Player {playerName} joined game {gameId}. Total players: {game.Players.Count}");
 
+        await Groups.AddToGroupAsync(Context.ConnectionId, gameId.ToString());
         await Clients.Group(gameId.ToString()).SendAsync("PlayerJoined", playerName);
     }
 }
