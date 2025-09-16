@@ -50,7 +50,7 @@ builder.Services.AddSignalR();
 var app = builder.Build();
 
 //Huby
-app.MapHub<GamesHub>("/hubs/game");
+app.MapHub<GamesHub>("/hubs/games");
 
 // 7. Użyj CORS
 app.UseCors("FrontendPolicy");
