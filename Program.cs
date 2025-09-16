@@ -3,7 +3,9 @@
 using Microsoft.EntityFrameworkCore;
 using QuizMuzycznyAPI.Config;
 using QuizMuzycznyAPI.Features.Users.Commands.CreateOrUpdateUser;
+using QuizMuzycznyAPI.Hubs;
 using QuizMuzycznyAPI.Repositories;
+using QuizMuzycznyAPI.Repositories.Games;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,7 @@ builder.Services.AddMediatR(cfg =>
 // 3. Dodaj repozytoria
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<ISessionsRepository, SessionsRepository>();
+builder.Services.AddSingleton<IGamesRepository, GamesRepository>();
 
 // 4. HttpClientFactory
 builder.Services.AddHttpClient();
@@ -42,8 +45,12 @@ builder.Services.AddCors(options =>
 
 // 6. Kontrolery
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
+
+//Huby
+app.MapHub<GamesHub>("/hubs/game");
 
 // 7. Użyj CORS
 app.UseCors("FrontendPolicy");
