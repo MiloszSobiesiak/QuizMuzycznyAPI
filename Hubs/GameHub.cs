@@ -13,6 +13,8 @@ public class GamesHub(IGamesRepository repo) : Hub
 
     public async Task JoinGame(Guid gameId, string playerName)
     {
+        Console.WriteLine($"Connected: {gameId}");
+        
         var game = repo.GetGame(gameId);
         Console.WriteLine($"Connected: {game.GameId}");
 
